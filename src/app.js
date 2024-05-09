@@ -59,5 +59,14 @@ app.put('/teams/:id', (req, res) => {
     res.status(200).json({ updateTeam });
 });
 
+//Deletando times por meio do método DELETE
+app.delete('/teams/:id', (req, res) => {
+    const { id } = req.params;
+    const arrayPosition = teams.findIndex((team) => team.id === Number(id));
+    teams.splice(arrayPosition, 1);
+
+    res.status(200).end();
+});
+
 
 module.exports = app;
