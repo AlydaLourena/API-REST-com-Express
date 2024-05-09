@@ -43,4 +43,21 @@ app.post('/teams', (req, res) => {
     res.status(201).json({ team: newTeam });
 });
 
+//Editando times por meio do método PUT
+app.put('/teams/:id', (req, res) => {
+    const { id } = req.params;
+    const { name, initials } = req.body;
+
+    const updateTeam = teams.find((team) => team.id === Number(id));
+
+    if (!updateTeam) {
+        return res.status(404).json({ message: 'Team not found' });
+    }
+
+    updateTeam.name = name;
+    updateTeam.initials = initials;
+    res.status(200).json({ updateTeam });
+});
+
+
 module.exports = app;
